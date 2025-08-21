@@ -1,0 +1,34 @@
+services:
+  task_manager_db:
+    image: postgres:17
+    container_name: task_manager_db
+    env_file:
+      - .env-non-dev
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U postgres" ]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+    ports:
+      - "5432:5432"
+    volumes:
+      - task_manager_postgres_data:/var/lib/postgresql/data
+
+
+  task_manager:
+    image: task_manager_image:latest
+    build:
+      context: .
+    container_name: task_manager_app
+    env_file:
+      - .env-non-dev
+    restart: always
+    depends_on:
+      task_manager_db:
+        condition: service_healthy
+    command: [ "bash", "/task_manager/docker/app.sh" ]
+    ports:
+      - "8000:8000"
+
+volumes:
+  task_manager_postgres_data:
