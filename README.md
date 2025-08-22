@@ -15,22 +15,6 @@ Gitlab CI
 Структура проекта:
 
 ```
-├── .gitignore
-├── .gitlab-ci.yml
-├── .idea
-    ├── .gitignore
-    ├── inspectionProfiles
-    │   ├── Project_Default.xml
-    │   └── profiles_settings.xml
-    ├── misc.xml
-    ├── modules.xml
-    ├── test_case_task_manager.iml
-    └── vcs.xml
-├── .isort.cfg
-├── Dockerfile
-├── LICENSE
-├── README.md
-├── alembic.ini
 ├── app
     ├── config.py
     ├── dao
@@ -51,8 +35,14 @@ Gitlab CI
     │   ├── models.py
     │   ├── router.py
     │   └── schemas.py
-├── docker-compose-local.yml
-├── docker-compose.yml
+├── tests
+    ├── api_tests
+        ├── tests_tasks_api.py
+        └── tests_users_api.py
+    ├── conftest.py
+    └── unit_tests
+        ├── tests_tasks_dao.py
+        └── tests_users_dao.py
 ├── docker
     └── app.sh
 ├── migrations
@@ -62,19 +52,20 @@ Gitlab CI
     └── versions
     │   ├── 0d4e51a51829_initial_migration.py
     │   └── 2bfeff22d049_поменял_тип_у_колонки_user_id_в_tasks.py
+├── .gitignore
+├── .gitlab-ci.yml
+├── .isort.cfg
+├── Dockerfile
+├── LICENSE
+├── README.md
+├── alembic.ini
+├── docker-compose-local.yml
+├── docker-compose.yml
 ├── poetry.lock
 ├── pyproject.toml
 ├── pyrightconfig.json
 ├── pytest.ini
-├── ruff.toml
-└── tests
-    ├── api_tests
-        ├── tests_tasks_api.py
-        └── tests_users_api.py
-    ├── conftest.py
-    └── unit_tests
-        ├── tests_tasks_dao.py
-        └── tests_users_dao.py
+└── ruff.toml
 ```
 
 Реализована работа с пользователями через JWT токены, пользователи могут создавать, просматривать задачи по отдельности и все вместе, изменять статусы и удалять задачи.
